@@ -2,41 +2,66 @@
 
 %%%
 
-\begin{frame}{Three Key Promises}
+\begin{frame}{Ownership}
 
-To guarantee memory safety, Rust gives us three key promises:
+Rust's central feature is ownership.
+Although the feature is straightforward to explain,
+it has deep implications for the rest of the language.
 
-\begin{itemize}
-	\item No null pointer dereferences
-		\pause
-		\begin{itemize}
-			\item There are no null pointers in safe Rust
-			\item For error handling and control flow, \texttt{Option} and
-				\texttt{Result} types are used.
-		\end{itemize}
-	\pause
-	\item No dangling pointers
-		\pause
-		\begin{itemize}
-			\item The concepts of "ownership", "borrowing" and "lifetimes" prevent the
-				use of uninitialized or freed pointers
-		\end{itemize}
-	\pause
-	\item No buffer overruns
-		\pause
-		\begin{itemize}
-		\item There's no pointer arithmetic in safe Rust
-		\item Arrays in Rust are not just pointers
-		\item There are runtime bounds checks for indexing
-		\item But most stdlib functions use iterators, which are checked at
-			compile time
-		\end{itemize}
-\end{itemize}
+All programs have to manage the way they use a
+computer's memory while running. Some languages
+have garbage collection that constantly looks for
+no longer used memory as the program runs;
+in other languages, the programmer must explicitly
+allocate and free the memory.
+
+Rust uses a third approach: memory is managed
+through a system of ownership with a set of rules
+that the compiler checks at compile time. None of
+the ownership features slow down your program
+while it's running.
 
 \end{frame}
 
 %%%
 
-\input{sections/4.1-error-handling}
-\input{sections/4.2-ownership}
-\input{sections/4.3-bufferoverruns}
+\begin{frame}[label={threerules}]{Three Rules}
+
+\begin{block}{Rule 1}
+Each value in Rust has a variable that’s called its owner.
+\end{block}
+\begin{block}{Rule 2}
+There can only be one owner at a time.
+\end{block}
+\begin{block}{Rule 3}
+When the owner goes out of scope, the value will be dropped.
+\end{block}
+
+\end{frame}
+
+%%%
+
+\begin{frame}[fragile]{Move, Copy, Clone}
+
+\begin{minted}{rust}
+let s1 = String::from("hello");
+let s2 = s1;
+
+println!("{}, world!", s1);
+\end{minted}
+
+\sep
+
+\begin{minted}[fontsize=\footnotesize]{text}
+error: use of moved value: `s1`
+let s2 = s1;
+  -- value moved here
+
+println!("{}, world!", s1);
+  ^^ value used here after move
+
+note: move occurs because `s1` has type `std::string::String`,
+which does not implement the `Copy` trait
+\end{minted}
+
+\end{frame}
