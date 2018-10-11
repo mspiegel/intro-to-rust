@@ -65,3 +65,15 @@ which does not implement the `Copy` trait
 \end{minted}
 
 \end{frame}
+
+%%%
+
+\begin{frame}{C++ Comparison}
+	\begin{itemize}
+    \item std::unique\_ptr $\rightarrow$ Rust's Box
+    \item std::shared\_ptr $\rightarrow$ Rust's Arc
+    \item no std::move in Rust. Moves are the default for non-Copy types
+    \item no rvalue references in Rust $\rightarrow$ no std::forward
+    \item only similarity between Rust references and C++ references is that they are non-null and always point to a valid object
+	\end{itemize}
+\end{frame}
