@@ -77,3 +77,93 @@ which does not implement the `Copy` trait
     \item only similarity between Rust references and C++ references is that they are non-null and always point to a valid object
 	\end{itemize}
 \end{frame}
+
+%%%
+
+\begin{frame}[c]{Data Races}
+\centering
+\begin{huge}
+\begin{tabular}{cll}
+  & sharing & \phantom{\Large{\textbf{Rust}: no sharing and}}  \\
++ & mutation &  \\
++ & no ordering &  \\
+\hline
+  & data race &  \\
+\end{tabular}
+\end{huge}
+\end{frame}
+
+%%%
+
+\begin{frame}[c]{Data Races}
+\centering
+\begin{huge}
+\begin{tabular}{cll}
+  & sharing &  \\
++ & mutation &  \\
++ & \soutthick{no ordering} & \Large{sequential programming} \\
+\hline
+  & data race &  \\
+\end{tabular}
+\end{huge}
+\end{frame}
+
+%%%
+
+\begin{frame}[c]{Data Races}
+\centering
+\begin{huge}
+\begin{tabular}{cll}
+  & sharing &  \\
++ & \soutthick{mutation} & \Large{functional languages} \\
++ & no ordering &  \\
+\hline
+  & data race &  \\
+\end{tabular}
+\end{huge}
+\end{frame}
+
+%%%
+
+\begin{frame}[c]{Data Races}
+\centering
+\begin{huge}
+\begin{tabular}{cll}
+  & \soutthick{sharing} & \Large{actor-based languages} \\
++ & mutation &  \\
++ & no ordering &  \\
+\hline
+  & data race &  \\
+\end{tabular}
+\end{huge}
+\end{frame}
+
+%%%
+
+\begin{frame}[c]{Data Races}
+\centering
+\begin{huge}
+\begin{tabular}{cll}
+  & sharing & \Large{\textbf{Rust}: no sharing and}  \\
++ & mutation & \Large{mutation \textbf{at the same time}} \\
++ & no ordering &  \\
+\hline
+  & data race &  \\
+\end{tabular}
+\end{huge}
+\end{frame}
+
+%%%
+
+\begin{frame}[c]{Data Races}
+\centering
+\begin{huge}
+\begin{tabular}{cll}
+  & sharing & \Large{\textbf{Rust}: no sharing and}  \\
++ & mutation & \Large{mutation \textbf{at the same time}} \\
++ & no ordering & \Large{(Or enforce ordering via API)} \\
+\hline
+  & data race & \\
+\end{tabular}
+\end{huge}
+\end{frame}
